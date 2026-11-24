@@ -1,0 +1,14 @@
+{
+  "name": "webtools",
+  "version": "0.1.0",
+  "description": "Free-quota web search & fetch toolkit: MCP server + CLI + skill docs",
+  "mcpServers": {
+    "webtools": {
+      "type": "stdio",
+      "command": "python",
+      "args": ["-m", "webtools.mcp_server"],
+      "timeoutMs": 300000
+    }
+  },
+  "skills": ["skills"]
+}

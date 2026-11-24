@@ -1,0 +1,9 @@
+{
+  "//": "Claude Desktop: merge into %APPDATA%\\Claude\\claude_desktop_config.json",
+  "mcpServers": {
+    "webtools": {
+      "command": "python",
+      "args": ["-m", "webtools.mcp_server"]
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "//": "Cherry Studio: schema varies by version. Add a stdio MCP server manually:",
+  "//command": "python",
+  "//args": ["-m", "webtools.mcp_server"],
+  "//note": "UI: Settings -> MCP Servers -> Add -> Type: stdio"
+}

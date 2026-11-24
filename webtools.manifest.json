@@ -1,0 +1,90 @@
+{
+  "name": "webtools",
+  "version": "0.1.0",
+  "description": "Free-quota web search & fetch toolkit for AI agents (MCP + CLI), tuned for poisoned-DNS / GFW networks",
+  "entrypoints": {
+    "mcp": {
+      "transport": "stdio",
+      "command": "python",
+      "args": ["-m", "webtools.mcp_server"],
+      "verified_command_windows": "python -m webtools.mcp_server"
+    },
+    "cli": {
+      "command": "webtools",
+      "fallback": ["python", "-m", "webtools.cli"]
+    }
+  },
+  "tools": [
+    {
+      "name": "web_search",
+      "params": {
+        "query": "string (required)",
+        "limit": "int, default 5",
+        "all": "bool, ignore provider cooldowns",
+        "reddit": "bool, force reddit channel",
+        "sites": "string, e.g. 'nexus:skyrimspecialedition,modio:valheim,github'"
+      },
+      "notes": "tavily/firecrawl never run together (monthly quota ledger picks one)"
+    },
+    {
+      "name": "web_research",
+      "params": {
+        "query": "string (required)",
+        "top": "int, pages to fetch, default 4",
+        "limit": "int, default 8",
+        "reddit": "bool"
+      }
+    },
+    {
+      "name": "web_fetch",
+      "params": {
+        "url": "string (required)",
+        "browser": "bool, force Camoufox"
+      },
+      "notes": "tier chain: API -> curl_cffi -> Camoufox -> Firecrawl (last resort)"
+    },
+    {
+      "name": "channel_status",
+      "params": {}
+    },
+    {
+      "name": "quota_status",
+      "params": {}
+    }
+  ],
+  "config": {
+    "home_env": "WEBTOOLS_HOME",
+    "default_home": "~/.webtools",
+    "keys": ["tavily", "firecrawl", "nexus"],
+    "key_files": "~/.webtools/keys/<name>.key",
+    "key_env_vars": ["TAVILY_API_KEY", "FIRECRAWL_API_KEY", "NEXUS_API_KEY"],
+    "state": "~/.webtools/state/",
+    "cache": "~/.webtools/cache/"
+  },
+  "requirements": {
+    "python": ">=3.10",
+    "required_deps": ["curl_cffi"],
+    "optional": {
+      "browser": {
+        "deps": ["camoufox"],
+        "post_install": ["python", "-m", "camoufox", "fetch"]
+      }
+    }
+  },
+  "adapters": {
+    "mcp/claude-desktop": "adapters/mcp/claude-desktop.json",
+    "mcp/cursor": "adapters/mcp/cursor.json",
+    "mcp/zcode": "adapters/mcp/zcode.json",
+    "mcp/cherry-studio": "adapters/mcp/cherry-studio.json",
+    "skill/claude-code": "adapters/skill/claude-code/SKILL.md",
+    "plugin/zcode": "adapters/plugin/zcode/plugin.json",
+    "instructions/agents-snippet": "adapters/instructions/AGENTS.snippet.md"
+  },
+  "installer": {
+    "detect": "python install.py --detect --json",
+    "install_one": "python install.py --client <name>",
+    "install_all": "python install.py --auto [--with-browser]",
+    "uninstall": "python install.py --uninstall --client <name>",
+    "verify": "python -m webtools doctor --json"
+  }
+}

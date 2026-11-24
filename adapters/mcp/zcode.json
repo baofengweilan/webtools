@@ -1,0 +1,14 @@
+{
+  "//": "ZCode: merge into ~/.zcode/cli/config.json -> mcp.servers",
+  "mcp": {
+    "servers": {
+      "webtools": {
+        "type": "stdio",
+        "command": "python",
+        "args": ["-m", "webtools.mcp_server"],
+        "timeoutMs": 300000,
+        "enabled": true
+      }
+    }
+  }
+}

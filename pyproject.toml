@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "webtools"
+version = "0.1.0"
+description = "Free-quota web search & fetch toolkit for AI agents (MCP server + CLI), designed for poisoned-DNS / GFW environments"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "wings" }]
+keywords = ["mcp", "web-search", "web-scraping", "agent", "camoufox", "china"]
+dependencies = [
+    "curl_cffi>=0.7",
+]
+
+[project.optional-dependencies]
+browser = ["camoufox>=0.5.0"]
+
+[project.scripts]
+webtools = "webtools.cli:main"
+webtools-mcp = "webtools.mcp_server:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+webtools = ["py.typed"]

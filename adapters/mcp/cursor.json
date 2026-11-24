@@ -1,0 +1,9 @@
+{
+  "//": "Cursor: merge into ~/.cursor/mcp.json (or project .cursor/mcp.json)",
+  "mcpServers": {
+    "webtools": {
+      "command": "python",
+      "args": ["-m", "webtools.mcp_server"]
+    }
+  }
+}
