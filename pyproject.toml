@@ -17,6 +17,7 @@ dependencies = [
 
 [project.optional-dependencies]
 browser = ["camoufox>=0.5.0"]
+dev = ["pytest>=8"]
 
 [project.scripts]
 webtools = "webtools.cli:main"
