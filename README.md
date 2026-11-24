@@ -31,6 +31,10 @@ One core, three shells: **MCP server** (recommended), **CLI**, and **skill docs*
 Download this repo, hand the folder to your AI agent and say "install" —
 `AGENTS.md` / `CLAUDE.md` in the repo root guide the agent automatically:
 
+> China network note: `git clone` needs a proxy (e.g. Watt Toolkit) because git
+> bypasses the Windows system proxy:
+> `git -c http.proxy=http://127.0.0.1:26561 -c http.sslVerify=false clone <url>`
+
 ```bash
 python install.py --detect --json     # detect local clients
 python install.py --auto              # write correct MCP config
@@ -131,6 +135,9 @@ MIT
 
 下载本仓库后，把它交给你的 AI agent，说"安装"即可——仓库根目录的 `AGENTS.md` / `CLAUDE.md`
 会指导 AI 自动执行：
+
+> 国内网络提示：`git clone` 需要代理（如 Watt Toolkit），因为 git 不走 Windows 系统代理：
+> `git -c http.proxy=http://127.0.0.1:26561 -c http.sslVerify=false clone <url>`
 
 ```bash
 python install.py --detect --json     # 探测本机客户端
