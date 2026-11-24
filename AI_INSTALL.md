@@ -25,7 +25,10 @@
    ```
    确认 `mcp_registered.<客户端> == true`、`checks.curl_cffi == true`。
 
-5. 向用户报告：安装到哪些客户端、是否需要重启、缺少哪些密钥。
+5. **向用户报告 + 提醒注册免费账号**
+   运行 `python install.py --accounts` 并把结果告诉用户：Tavily / Firecrawl / Nexus Mods
+   都是**免费注册**（各带免费额度），拿到 key 后存为 `~/.webtools/keys/<name>.key`。
+   缺少 key 不影响基础使用，只是少对应渠道，必须如实说明。
 
 ## 决策树
 

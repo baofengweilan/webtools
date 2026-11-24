@@ -108,6 +108,49 @@ def detect() -> dict:
     return out
 
 
+ACCOUNTS = [
+    ("tavily", "Tavily",
+     "https://app.tavily.com/home",
+     "1000 credits/month free (web search)"),
+    ("firecrawl", "Firecrawl",
+     "https://firecrawl.dev",
+     "1000 credits/month free (search + scrape relay)"),
+    ("nexus", "Nexus Mods",
+     "https://www.nexusmods.com/users/myaccount?tab=api",
+     "free personal API key (Nexus mod pages, ~1s instead of ~15s)"),
+]
+
+
+def _key_configured(name: str) -> bool:
+    env = os.environ.get(name.upper() + "_API_KEY")
+    if env and env.strip():
+        return True
+    try:
+        return bool((HOME / ".webtools" / "keys" / f"{name}.key")
+                    .read_text(encoding="utf-8").strip())
+    except OSError:
+        return False
+
+
+def print_accounts() -> None:
+    """Reminder for the user (and the AI) about free API accounts."""
+    print("\n== free API accounts (optional, but recommended) ==")
+    missing = 0
+    for key, service, url, note in ACCOUNTS:
+        state = "configured" if _key_configured(key) else "NOT configured"
+        if not _key_configured(key):
+            missing += 1
+        print(f"  {service:12} {state:14} {note}")
+        if not _key_configured(key):
+            print(f"  {'':12} register: {url}")
+    if missing:
+        print(f"\n  {missing} account(s) missing - ask the USER to register "
+              f"(free tiers), then save each key as ~/.webtools/keys/<name>.key")
+        print("  Everything still works without them: missing channels are skipped.")
+    else:
+        print("\n  all accounts configured")
+
+
 def ensure_home() -> Path:
     try:
         from webtools._paths import home, ensure_dirs
@@ -179,9 +222,16 @@ def main() -> int:
     ap.add_argument("--client", default=None)
     ap.add_argument("--uninstall", action="store_true")
     ap.add_argument("--with-browser", action="store_true")
+    ap.add_argument("--accounts", action="store_true",
+                    help="show free API account checklist and exit")
     args = ap.parse_args()
 
     base = ensure_home()
+
+    if args.accounts:
+        print(f"webtools home: {base}")
+        print_accounts()
+        return 0
 
     if args.detect:
         info = detect()
@@ -215,6 +265,7 @@ def main() -> int:
             maybe_install_browser()
         print("\nnext: restart your client, then check MCP tools "
               "(web_search / web_research / web_fetch / quota_status / channel_status)")
+        print_accounts()
         return rc
 
     ap.print_help()

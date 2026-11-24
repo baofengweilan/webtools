@@ -27,9 +27,16 @@
    ```
    预期：`checks.curl_cffi == true`；`mcp_registered.<client> == true`；`key:*` 取决于用户是否配置。
 
-5. **向用户报告**
+5. **向用户报告 + 提醒注册免费账号**
    - 装了哪些客户端、需要重启才能生效
-   - 缺哪些 key（免费申请地址见 `~/.webtools/keys/README.txt`）
+   - 运行 `python install.py --accounts`，**逐条提醒用户注册**下列免费账号（缺省不影响基础使用，只是少渠道）：
+     | 服务 | 注册地址 | 免费额度 |
+     |---|---|---|
+     | Tavily | https://app.tavily.com/home | 1000 credits/月（搜索） |
+     | Firecrawl | https://firecrawl.dev | 1000 credits/月（搜索 + 抓取中转） |
+     | Nexus Mods | https://www.nexusmods.com/users/myaccount?tab=api | 免费个人 API key（模组页 1 秒 vs 15 秒） |
+   - 拿到 key 后存为 `~/.webtools/keys/<name>.key`（一行纯文本），或设环境变量
+     `TAVILY_API_KEY` / `FIRECRAWL_API_KEY` / `NEXUS_API_KEY`
    - 工具如何验证（客户端里应出现 web_search / web_research / web_fetch / quota_status / channel_status）
 
 ## 排错
