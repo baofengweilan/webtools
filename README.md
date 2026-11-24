@@ -42,6 +42,10 @@ python install.py --accounts          # remind the user about free API keys
 python -m webtools doctor --json      # verify
 ```
 
+> Note: the installer pins the **current Python executable** into the MCP config.
+> If you move/recreate the Python environment (or delete the venv), re-run
+> `python install.py --auto` to refresh the path.
+
 ### Manual install
 
 ```bash
@@ -145,6 +149,10 @@ python install.py --auto              # 自动写入正确的 MCP 配置
 python install.py --accounts          # 提醒用户注册免费 API 账号
 python -m webtools doctor --json      # 验证
 ```
+
+> 注意：安装器会把**当前 Python 解释器的绝对路径**写进 MCP 配置。
+> 如果 Python 环境变了（换 venv、重装 Python、删掉 venv），需要重跑
+> `python install.py --auto` 刷新路径。
 
 ### 手动安装
 
