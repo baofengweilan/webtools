@@ -9,6 +9,12 @@
 Free-quota web search & fetch toolkit for AI agents, built for **poisoned-DNS / GFW / CAPTCHA** environments.
 One core, three shells: **MCP server** (recommended), **CLI**, and **skill docs**.
 
+> **Positioning — fallback first.** Always let your agent try its **built-in
+> WebSearch / WebFetch** first. webtools is the **second line**: it takes over
+> when the built-ins fail (blocked sites, exhausted quota, timeouts, CAPTCHA
+> walls) — and doubles as a standalone toolkit for agents that have no
+> built-ins at all.
+
 ### Features
 
 - **Multi-source parallel search**: tavily / firecrawl (1000 free credits/month each, used
@@ -121,6 +127,10 @@ MIT
 
 给 AI agent 用的**免费额度网页搜索/抓取工具链**，专为**被墙 / DNS 污染 / 验证码**环境设计。
 一套内核，三种形态：**MCP 服务器**（推荐）、**CLI**、**技能文档**。
+
+> **定位——兜底优先。** 永远先让 agent 用**自带的 WebSearch / WebFetch**；
+> webtools 是**第二梯队**：自带工具失败（站点被墙、额度耗尽、超时、验证码拦截）时接管，
+> 同时也是没有内置工具的 agent 的独立工具箱。
 
 ### 特性
 
